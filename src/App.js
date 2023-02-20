@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {useData} from "./context/DataContext";
+import {useEffect} from "react";
 
 function App() {
+    const {notifications} = useData();
+    useEffect(() => {
+        console.log(notifications)
+    }, [notifications])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="px-10 flex flex-col">
+        <h3 className="text-xl mb-10"> Notifications </h3>
+        {
+            notifications.map((each, index) => {
+                return(<div className="flex">
+                    <span>{index} . </span>
+                    <div>
+                        {JSON.stringify(each)}
+                    </div>
+
+                </div>)
+            })
+        }
     </div>
   );
 }
